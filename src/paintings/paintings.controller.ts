@@ -3,8 +3,8 @@ import { Controller, Get, Post, Patch, Delete, Param, Body, Query} from '@nestjs
 @Controller('paintings')
 export class PaintingsController {
 
-    @Get() // GET /paintings
-    getPaintings() {
+    @Get() // GET /paintings or e.g. /paintings?author=vangogh&year=1888
+    getPaintings(@Query('author') author?: string) {
         return 'all paintings';
     }
 
@@ -14,12 +14,12 @@ export class PaintingsController {
     }
 
     @Post() // POST /paintings
-    createPainting(@Body() painting: {}) {
+    createPainting(@Body() painting: { }) {
         return 'create';
     }
 
     @Patch(':id') // PATCH /paintings/:id
-    updatePainting(@Param('id') id: string, @Body() paintingUpdate: {}) {
+    updatePainting(@Param('id') id: string, @Body() paintingUpdate: { }) {
         return 'update';
     }
 
