@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePaintingDto } from './dto/create-painting.dto';
 import { UpdatePaintingDto } from './dto/update-painting.dto';
+import { NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class PaintingsService {
@@ -29,6 +30,8 @@ export class PaintingsService {
 
     getOnePainting(id: number) {
         const painting = this.paintings.find(painting => painting.id === id);
+
+        if (!painting) throw new NotFoundException("Painting Not Found");
 
         return painting;
     }
