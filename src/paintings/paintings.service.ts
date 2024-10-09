@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePaintingDto } from './dto/create-painting.dto';
+import { UpdatePaintingDto } from './dto/update-painting.dto';
 
 @Injectable()
 export class PaintingsService {
@@ -43,7 +44,7 @@ export class PaintingsService {
         return newPainting;
     }
 
-    updatePainting(id: number, updatedPainting: { title?: string, author?: string, year?: number }) {
+    updatePainting(id: number, updatedPainting: UpdatePaintingDto) {
         this.paintings = this.paintings.map(painting => {
             if (painting.id === id) {
                 return {...painting, ...updatedPainting} // updatedPainting will override only the properties it contains

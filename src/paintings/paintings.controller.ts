@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Patch, Delete, Param, Body, Query, ParseIntPipe } from '@nestjs/common';
 import { PaintingsService } from './paintings.service';
 import { CreatePaintingDto } from './dto/create-painting.dto';
+import { UpdatePaintingDto } from './dto/update-painting.dto';
 
 @Controller('paintings')
 export class PaintingsController {
@@ -22,7 +23,7 @@ export class PaintingsController {
     }
 
     @Patch(':id') // PATCH /paintings/:id
-    updatePainting(@Param('id', ParseIntPipe) id: number, @Body() paintingUpdate: { title?: string, author?: string, year?: number }) {
+    updatePainting(@Param('id', ParseIntPipe) id: number, @Body() paintingUpdate: UpdatePaintingDto) {
         return this.paintingsService.updatePainting(id, paintingUpdate);
     }
 
