@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Patch, Delete, Param, Body, Query, ParseIntPipe } from '@nestjs/common';
 import { PaintingsService } from './paintings.service';
+import { CreatePaintingDto } from './dto/create-painting.dto';
 
 @Controller('paintings')
 export class PaintingsController {
@@ -16,7 +17,7 @@ export class PaintingsController {
     }
 
     @Post() // POST /paintings
-    createPainting(@Body() painting: { title: string, author: string, year: number }) {
+    createPainting(@Body() painting: CreatePaintingDto) {
         return this.paintingsService.createPainting(painting);
     }
 

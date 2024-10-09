@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { CreatePaintingDto } from './dto/create-painting.dto';
 
 @Injectable()
 export class PaintingsService {
@@ -31,7 +32,7 @@ export class PaintingsService {
         return painting;
     }
 
-    createPainting(painting: { title: string, author: string, year: number }) {
+    createPainting(painting: CreatePaintingDto) {
         const paintingsByHighestId = [...this.paintings].sort((a,b) => b.id - a.id);
         const newPainting = {
             id: paintingsByHighestId[0].id + 1, // generates new highest id
