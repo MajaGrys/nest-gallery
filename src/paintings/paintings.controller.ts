@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Delete, Param, Body, Query, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Param, Body, Query, ParseIntPipe, ValidationPipe } from '@nestjs/common';
 import { PaintingsService } from './paintings.service';
 import { CreatePaintingDto } from './dto/create-painting.dto';
 import { UpdatePaintingDto } from './dto/update-painting.dto';
@@ -18,12 +18,12 @@ export class PaintingsController {
     }
 
     @Post() // POST /paintings
-    createPainting(@Body() painting: CreatePaintingDto) {
+    createPainting(@Body(ValidationPipe) painting: CreatePaintingDto) {
         return this.paintingsService.createPainting(painting);
     }
 
     @Patch(':id') // PATCH /paintings/:id
-    updatePainting(@Param('id', ParseIntPipe) id: number, @Body() paintingUpdate: UpdatePaintingDto) {
+    updatePainting(@Param('id', ParseIntPipe) id: number, @Body(ValidationPipe) paintingUpdate: UpdatePaintingDto) {
         return this.paintingsService.updatePainting(id, paintingUpdate);
     }
 
