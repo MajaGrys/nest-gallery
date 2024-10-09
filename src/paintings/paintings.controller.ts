@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Delete, Param, Body, Query} from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Param, Body, Query, ParseIntPipe } from '@nestjs/common';
 import { PaintingsService } from './paintings.service';
 
 @Controller('paintings')
@@ -11,8 +11,8 @@ export class PaintingsController {
     }
 
     @Get(':id') // GET /paintings/:id
-    getOnePainting(@Param('id') id: string) {
-        return this.paintingsService.getOnePainting(+id);
+    getOnePainting(@Param('id', ParseIntPipe) id: number) {
+        return this.paintingsService.getOnePainting(id);
     }
 
     @Post() // POST /paintings
@@ -21,12 +21,12 @@ export class PaintingsController {
     }
 
     @Patch(':id') // PATCH /paintings/:id
-    updatePainting(@Param('id') id: string, @Body() paintingUpdate: { title?: string, author?: string, year?: number }) {
-        return this.paintingsService.updatePainting(+id, paintingUpdate);
+    updatePainting(@Param('id', ParseIntPipe) id: number, @Body() paintingUpdate: { title?: string, author?: string, year?: number }) {
+        return this.paintingsService.updatePainting(id, paintingUpdate);
     }
 
     @Delete(':id') // DELETE /paintings/:id
-    deletePainting(@Param('id') id: string) {
-        return this.paintingsService.deletePainting(+id);
+    deletePainting(@Param('id', ParseIntPipe) id: number) {
+        return this.paintingsService.deletePainting(id);
     }
 }
